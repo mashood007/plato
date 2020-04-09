@@ -2,7 +2,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: plato4
+  database: plato5
   host: localhost
   pool: 5
   username: mashood
