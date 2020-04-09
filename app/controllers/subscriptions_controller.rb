@@ -2,14 +2,12 @@ class SubscriptionsController < ApplicationController
 
 
   def details
-  	if !params[:id].blank?
-  		@subscription = Subscription.find(params[:id])
-  	end
+  	@subscription = Subscription.find(params[:id])
   end
 
   def calculate
-  	@message = Bill.calculate params
-  	render json:  @message
+  	@bill = Bill.new(params)
+  	render json:  @bill.message
   end
 
 end

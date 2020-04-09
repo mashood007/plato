@@ -1,54 +1,47 @@
 class Bill
 
-	def self.calculate params
-	   @subscription = Subscription.find(params[:id])
-	   case params[:id].to_i
-	   	 when 1 
-	   	 	solo params
-	   	 when 2
-	   	 	startup params
-	   	 when 3
-	   		enterprice params
-	   end
+	def initialize params
+		@number_of_users = params[:number_of_users].to_i
+		@number_of_boards = params[:number_of_boards].to_i
+		@subscription = Subscription.find(params[:id])
 	end
 
-	def self.solo params
-	  if params[:number_of_boards].to_i > 0
-	  	 monthly = params[:number_of_boards].to_i*2
-	  	 anual_pay = monthly * 12
-	   	 {title: "calculated", message: "$#{monthly} for monthly, Anual cost is $#{anual_pay}"}
-	  else
-	  	{title: "error" , message: "Should have at least one board" }
-	  end
-	end
-
-
-	def self.startup params
-		number_of_users =  params[:number_of_users].to_i
-		if number_of_users > 4
-			basic_charge = 240 #20*12
-			board_charge = 216 #18*12
-			additional_charge = number_of_users > 5 ? ((number_of_users - 5) * 7*12) : 0
-			anual_pay = basic_charge + board_charge + additional_charge
-	   	    {title: "calculated", message: "Anual cost is $#{anual_pay}"}
+	def message
+		if !@subscription.unlimited_boards && @number_of_boards < 1
+			{title: "error" , message: "Should have at least one board" }
+		elsif @subscription.minimum_users > @number_of_users
+			{title: "error" , message: "Should have at least #{@subscription.minimum_users} users" }
 		else
-			{title: "error" , message: "Should have at least 5 users" }
+			total_cost
 		end
-		
 	end
 
-	def self.enterprice params
-		number_of_users =  params[:number_of_users].to_i
-		if number_of_users > 19
-			basic_charge = 720 #60*12
-			board_charge = 660 #55*12
-			additional_charge = number_of_users > 20 ? ((number_of_users - 20) * 6*12) : 0
-			anual_pay = basic_charge + board_charge + additional_charge
-	   	    {title: "calculated", message: "Anual cost is $#{anual_pay}"}
-		else
-			{title: "error" , message: "Should have at least 20 users" }
-		end
-		
+	def anual_cost   
+	   board_cost =  @subscription.unlimited_boards ? unlimited_board_cost : limited_boards
+	   users_cost = @subscription.additional_users ? additional_users_cost : 0
+	   basic_cost + board_cost + board_cost
 	end
+
+	def unlimited_board_cost
+		@subscription.board_cost * 12
+	end
+
+	def limited_boards
+		@subscription.board_cost * @number_of_boards * 12
+	end
+
+	def basic_cost
+		@subscription.basic_cost * 12
+	end
+
+	def additional_users_cost
+		additional_users = @number_of_users - @subscription.minimum_users
+		additional_users > 0 ? (additional_users * @subscription.cost_per_add_user * 12 ) : 0
+	end
+
+	def total_cost
+		{title: "calculated", message: "Anual Total Cost is $#{anual_cost}"}
+	end
+
 
 end
