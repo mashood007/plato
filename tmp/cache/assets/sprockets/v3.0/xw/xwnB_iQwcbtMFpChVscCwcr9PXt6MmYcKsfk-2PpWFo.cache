@@ -1,0 +1,31 @@
+I"§(function() {
+  window.calculate_subscription = function(id) {
+    var number_of_boards, number_of_users;
+    number_of_users = $('#number_of_users').val();
+    number_of_boards = $('#number_of_boards').val();
+    $.ajax({
+      url: '/subscriptions/calculate.json',
+      type: 'get',
+      data: {
+        id: id,
+        number_of_users: number_of_users,
+        number_of_boards: number_of_boards
+      },
+      success: function(response) {
+        var message;
+        var message;
+        if (response.title === 'error') {
+          $('.subscribe_button').hide();
+          message = '<div class=\'alert alert-danger\'>' + response.message + '</div>';
+        } else {
+          $('.subscribe_button').show();
+          message = '<div class=\'alert alert-success\'>' + response.message + '</div>';
+        }
+        $('.subscription_messages').html(message);
+      },
+      error: function(xhr) {}
+    });
+  };
+
+}).call(this);
+:ET

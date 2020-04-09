@@ -1,0 +1,22 @@
+    
+    <% unless @children.blank? %>
+      <div style="height: 2px;width: 35px;background: red;position: relative;top: 25px;left: -18px;"></div>
+      <%end%>
+  		<% @children.each do |card| %>
+        <div class="row" style="margin-bottom: 5px;padding-left: 30px;">
+        <div class="col-sm-2 card-1" style="border-color: <%=border_color(card)%>" onclick="card_tasks('<%=card.id%>')" id="card_<%=card.id%>">
+          <%=card.title%>  
+        </div>
+
+        <!-- Modal -->
+        <div class="tasks_modal" id="Modal_<%=card.id%>" >
+        </div>
+
+        <div class="col" id="parent_<%=card.id%>"></div>
+        </div>
+
+        <script type="text/javascript">
+          children("<%=card.id%>")
+        </script>
+      <%end%>
+

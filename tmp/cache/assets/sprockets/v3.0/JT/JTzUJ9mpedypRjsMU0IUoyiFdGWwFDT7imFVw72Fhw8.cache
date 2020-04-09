@@ -1,0 +1,9 @@
+I"Ÿ(function() {
+  $(document).ready(function() {
+    return $('#subscribe_subscription_id').change(function() {
+      alert("dd");
+    });
+  });
+
+}).call(this);
+:ET

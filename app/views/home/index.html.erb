@@ -1,0 +1,24 @@
+
+<div class="container">
+
+  <br/>
+  <div class="row">
+    <%= link_to boards_path, html_options = {:class => "btn btn-success col-sm-4"} do %>
+      <p style="height: 100px;padding: 50px;">
+        Boards
+      </p>
+    <%end%>
+    <div class="col-sm-1"></div>
+    <% if !current_user.normal_user %>
+
+    <%= link_to users_path, html_options = {:class => "btn btn-info col-sm-4"} do %>
+      <p style="height: 100px;padding: 50px;">
+        Users
+      </p>
+    <%end%>
+    <%end%>
+
+  </div>
+
+
+</div>

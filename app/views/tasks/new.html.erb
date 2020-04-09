@@ -1,0 +1,8 @@
+<div class="container">
+<h1>New Task of <%=@card.title%></h1>
+
+	<%= render 'form', task: @task %>
+	<div class="col">
+	<%= link_to 'Back', board_cards_path(@card.board) %>
+	</div>
+</div>

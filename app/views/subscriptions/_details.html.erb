@@ -1,0 +1,24 @@
+<% if !@subscription.blank? %>
+<div class="jumbotron">
+	<% if @subscription.id == 1 %>
+	<p>
+		<label>Number of Boards</label>
+		<input type="number" name="subscribe[number_of_boards]" onkeyup="calculate_subscription('<%=@subscription.id%>')" id="number_of_boards" >
+		<label>Number of Users</label>
+		<span><b>1</b>.</span>
+		<input type="hidden" name="subscribe[number_of_users]" value="1"  id="number_of_users" >		
+	</p>
+	<%end%>
+
+	<% if @subscription.id >= 2 %>
+	<p>
+		<label>Number of Boards</label>
+		<input type="hidden" value="-1"  name="subscribe[number_of_boards]" id="number_of_boards" >	
+		<label><b>Unlimited</b>.</label>
+		<label>Number of Users</label>
+		<input type="number" name="subscribe[number_of_users]" onkeyup="calculate_subscription('<%=@subscription.id%>')"  id="number_of_users" >
+	</p>
+	<%end%>
+
+</div>
+<%end%>

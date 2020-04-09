@@ -1,0 +1,24 @@
+$('#Modal_<%=@card.id%>').show()
+$('#Modal_<%=@card.id%>').html("<%= escape_javascript(render('tasks')) %>")
+
+$('input[name="task_ids[]"]').change(function(){
+
+	var task = $(this).val()
+	var completed = this.checked
+	
+
+        
+		$.ajax({
+		  url: "tasks/change",
+		  type: "get",
+		  data: {id: task, completed: completed}, //send it through get method
+		  success: function(response) {
+		    //Do Something
+		  },
+		  error: function(xhr) {
+		    //Do Something to handle error
+		  }
+		});		
+			
+
+ });

@@ -1,0 +1,2 @@
+$('#card_<%=@card.id%>').css("border-color", "<%=border_color(@card)%>" )
+$("#card_report").html("<%= escape_javascript(render('cards/card_report')) %>")

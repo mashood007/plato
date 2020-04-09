@@ -1,0 +1,27 @@
+  	<p><%= @board.title %></p>
+  	<p>  <%= link_to 'New Card', new_board_card_path %></p>
+    <table class="table table-bordered" >
+      <tr>
+        <th>
+          Completed Cards
+        </th>
+      </tr>
+      <% @completed_cards.each do |card| %>
+      <tr>
+        <td><%=card.title%></td>
+      </tr>
+      <% end %>
+    </table>
+
+    <table class="table table-bordered">
+      <tr>
+        <th>
+          Incompleted Cards
+        </th>
+      </tr>
+      <% @uncompleted_cards.each do |card| %>
+      <tr>
+        <td><%=card.title%></td>
+      </tr>
+      <% end %>
+    </table>

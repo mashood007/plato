@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Plato</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Plato</a>
+    </div>
+    <div class="navbar-header" style="float: right">
+      <span class="navbar-brand"><%= @user.name %></span>
+      <a class="navbar-brand" href="#" >Logout</a>
+    </div>
+  </div>
+</nav>
+<%= yield %>
+  </body>
+</html>

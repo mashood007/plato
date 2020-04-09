@@ -1,0 +1,7 @@
+I"w(function() {
+  $('#subscribe_subscription_id').change(function() {
+    return alert("ss");
+  });
+
+}).call(this);
+:ET

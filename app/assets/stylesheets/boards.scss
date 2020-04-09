@@ -1,0 +1,12 @@
+// Place all the styles related to the boards controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.board{
+	border: 1px solid blue;
+	background: #b9b9b9;
+	margin-right: 5px;
+	padding: 10px;
+	text-align: center;
+	}
+
+.canvas-col{border: 1px solid #4d94ff;height:auto;min-height: 700px;overflow: scroll;padding: 30px;}

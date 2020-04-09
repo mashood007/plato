@@ -1,0 +1,29 @@
+
+
+<div class="container">
+<p id="notice"><%= notice %></p>
+<br>
+<% if boards_within_limit? %>
+  <%= link_to 'New Board', new_board_path %>
+<%end%>
+<h1>Boards</h1>
+
+ <div class="row">
+
+ 
+    <% @boards.each do |board| %>
+   <div class="col-sm-3 board" >
+        <p><%= board.title %></p>
+        <p><%= board.organisation.name %></p>
+        <p><%= board.user.email %></p>
+        <p>
+        <%= link_to 'Open' , board_cards_path(board) %>
+        <%= link_to 'Show', board %>
+        <%= link_to 'Edit', edit_board_path(board) %>
+        <%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      </div>
+    <% end %>
+ </div>
+
+
+</div>

@@ -1,0 +1,29 @@
+<div class="container-fluid text-center">    
+  <div class="row content">
+  	<div class="col-sm-3 canvas-col" id="card_report">
+      <%= render 'card_report' %>
+
+  	</div>
+  	<div class="col-sm-9 canvas-col" style="background: #f1f1f1;">
+  		<% @cards.each do |card| %>
+  			<div class="row" style="margin-bottom: 5px;">
+
+  			<div class="col-sm-2 card-1" style="border-color: <%=border_color(card)%>" onclick="card_tasks('<%=card.id%>')" id="card_<%=card.id%>" >
+  				<%=card.title%>	 
+  			</div>
+
+			  <!-- Modal -->
+			  <div class="tasks_modal" id="Modal_<%=card.id%>" >
+			  </div>
+
+  			<div class="col" id="parent_<%=card.id%>"></div>
+  			</div>
+
+  			<script type="text/javascript">
+  				children("<%=card.id%>")
+  			</script>
+  		<%end%>
+
+  	</div>
+  </div>
+</div>

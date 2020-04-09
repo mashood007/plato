@@ -1,0 +1,40 @@
+<br>
+<br>
+<div class="container">
+
+  <div class="row">
+    <% first = @subscriptions.first.try(:id) %>
+    <% @subscriptions.each do |subscription_type| %>
+    <div class="col-3 btn btn-secondary subscription_type <%= border(first, subscription_type.id) %>" onclick="select_subsciption_type('<%=subscription_type.id%>')" id="subscription_type_<%=subscription_type.id%>">
+
+     <p><b> <%= subscription_type.title %></b></p>
+     <p><%= subscription_type.description %></p>
+     <p><b>Minimum Number of Users</b> <span><%= subscription_type.number_of_users %></span></p>
+    </div>
+    <%end%>
+  </div>
+
+<%= form_for @organisation, as: :subscribe, url: subscribed_organisations_path do |form| %>
+	<%= form.hidden_field :id %>
+  <div class="form-group row">
+    <%= form.hidden_field :subscription_id, :value => first %>
+  </div>
+
+
+
+  <div class="form-group row">
+  	<div class="col-sm-9" id="subscription_type_details">
+  		
+  	</div>
+    <div class="col-sm-9 subscription_messages"></div>
+  </div>
+
+  <div class="form-group row">
+  		<%= form.submit "Pay", :class => "btn btn-info subscribe_button" %>
+  </div>
+
+<%end%>
+</div>
+<script type="text/javascript">
+  select_subsciption_type("<%= first %>")
+</script>

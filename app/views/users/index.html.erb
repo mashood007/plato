@@ -1,0 +1,51 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <h1>Users</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td></td>
+          <td><%= link_to 'Show', user %></td>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <%unless current_user.id == user.id %>
+            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%else%>
+          <td style="color: red"><b>Admin</b></td>
+          <%end%>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  <% if !current_user.normal_user && users_within_limit? %>
+    <%= form_tag add_users_path, :class => "form-inline" do %>
+    <div class="form-group">
+      <label> Email</label> &nbsp;
+      <%= text_field_tag :email, "", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      &nbsp;&nbsp;<label>Password</label> &nbsp;
+      <%= text_field_tag :password, "", class: "form-control" %>
+    </div>&nbsp;&nbsp;
+      <%= submit_tag "Add New User", :class => "btn btn-info" %>
+    <% end %>
+  <% end %>
+<br>
+<%= link_to 'Back To Home', home_index_path %>
+
+  <br>
+</div>
