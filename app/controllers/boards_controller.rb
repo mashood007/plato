@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_board, only: [:show, :edit, :destroy]
+  before_action :set_board, only: [:edit, :update, :destroy]
+  before_action :authenticate_board, only: [:edit, :destroy]
   before_action :add_user_id_and_organisation_id_into_params, only: [:create]
   before_action :check_limit, only: [:create, :new]
 
@@ -10,8 +10,6 @@ class BoardsController < ApplicationController
   end
 
 
-  def show
-  end
 
   def new
     @board = Board.new

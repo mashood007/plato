@@ -1,5 +1,7 @@
 class OrganisationsController < ApplicationController
 
+	before_action :set_subscription, only: [:subscribed]
+
 	def new
 		@organisation = Organisation.new
 		@organisation.users.build
@@ -34,7 +36,7 @@ class OrganisationsController < ApplicationController
 	end
 
 	def plan_choice
-		@subscriptions = Subscription.all#.collect {|s| [s.title, s.id]}
+		@subscriptions = Subscription.all
 		@organisation = current_user.organisation
 	end
 
@@ -53,7 +55,14 @@ private
     end
 
   def subscribe_params
+  	params[:subscribe][:number_of_boards] == -1 if @subscription.unlimited_boards
+  	params[:subscribe][:number_of_users] = !@subscription.additional_users ? @subscription.minimum_users  : (params[:subscribe][:number_of_users].to_i+@subscription.minimum_users)
   	params.require(:subscribe).permit(:id, :subscription_id, :number_of_boards, :number_of_users)
   end
+
+  def set_subscription
+  	@subscription = Subscription.find(params[:subscribe][:subscription_id])
+  end
+
 
 end

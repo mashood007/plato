@@ -18,7 +18,7 @@
     <div class="navbar-header" style="float: right">
       <% if user_signed_in? %>
       <%= current_user.email %> | 
-      <%= current_user.organisation.try(:name) %> | 
+      <button type="button" class="btn btn-link" data-toggle="modal" data-target="#organisation"> <%= current_user.organisation.try(:name) %> </button>| 
       <%= link_to 'Home', home_index_path %> | 
         <%= link_to "Edit profile", edit_user_registration_path %> |
         <%= link_to "Logout", destroy_user_session_path, method: :delete  %> 
@@ -29,6 +29,32 @@
     </div>
   </div>
 </nav>
+
+<% if !current_user.blank? && !current_user.organisation.blank? %>
+  <!-- Modal -->
+  <div class="modal fade" id="organisation" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><%= current_user.organisation.try(:name) %></h4>
+        </div>
+        <div class="modal-body">
+          <p>Location: <%= current_user.organisation.try(:location) %></p>
+          <p>Subscription package: <%= current_user.organisation.subscription.title if  !current_user.organisation.subscription.blank? %></p>
+          <p>Maximum Users: <%= current_user.organisation.number_of_users if  !current_user.organisation.blank? %></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<%end%>
+
 <%= yield %>
   </body>
 </html>

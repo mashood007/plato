@@ -22,8 +22,8 @@ window.calculate_subscription = (id) ->
 
 window.select_subsciption_type = (subscription_id) ->
   $('#subscribe_subscription_id').val subscription_id
-  $('.subscription_type').removeClass 'border_red'
-  $('#subscription_type_' + subscription_id).addClass 'border_red'
+  $('.subscription_type').removeClass 'bg-danger'
+  $('#subscription_type_' + subscription_id).addClass 'bg-danger'
   $.ajax
     url: '/subscriptions/details'
     type: 'get'

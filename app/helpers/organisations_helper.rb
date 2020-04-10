@@ -1,7 +1,7 @@
 module OrganisationsHelper
 
 	def border(first, subscription_type_id)
-		first == subscription_type_id ? "border_red" : ""
+		first == subscription_type_id ? "bg-danger" : ""
 	end
 
 end

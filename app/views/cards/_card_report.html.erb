@@ -1,5 +1,6 @@
-  	<p><%= @board.title %></p>
+  	<p><b><%= @board.title %></b></p>
   	<p>  <%= link_to 'New Card', new_board_card_path %></p>
+    <p>  <%= link_to 'Back To Boards', boards_path %></p>
     <table class="table table-bordered" >
       <tr>
         <th>
@@ -20,6 +21,19 @@
         </th>
       </tr>
       <% @uncompleted_cards.each do |card| %>
+      <tr>
+        <td><%=card.title%></td>
+      </tr>
+      <% end %>
+    </table>    
+
+    <table class="table table-bordered">
+      <tr>
+        <th>
+          Draft Cards
+        </th>
+      </tr>
+      <% @draft_cards.each do |card| %>
       <tr>
         <td><%=card.title%></td>
       </tr>

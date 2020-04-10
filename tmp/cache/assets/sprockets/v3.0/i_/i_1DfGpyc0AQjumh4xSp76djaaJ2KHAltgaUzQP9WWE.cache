@@ -1,0 +1,40 @@
+I"(function() {
+  window.card_tasks = function(id) {
+    return $.ajax({
+      url: '/cards/' + id + '/tasks',
+      type: 'get'
+    });
+  };
+
+  window.close_modal = function() {
+    return $('.tasks_modal').hide();
+  };
+
+  window.children = function(parent) {
+    return $.ajax({
+      url: 'cards/get_children',
+      type: 'get',
+      data: {
+        parent: parent
+      }
+    });
+  };
+
+  $(document).ready(function() {
+    return $(document).on('change', 'input[name="task_ids[]"]', function() {
+      var completed, task;
+      task = $(this).val();
+      completed = this.checked;
+      return $.ajax({
+        url: 'tasks/change',
+        type: 'get',
+        data: {
+          id: task,
+          completed: completed
+        }
+      });
+    });
+  });
+
+}).call(this);
+:ET

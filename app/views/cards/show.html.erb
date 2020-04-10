@@ -1,0 +1,39 @@
+<div class="container-fluid text-center">
+<br><br>
+	<div class="col-11">
+		<%= link_to 'Back To Cards' , board_cards_path(@board) %>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th>Title</th>
+					<td><%= @card.title %></td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td><%= @card.description %> </td>
+				</tr>
+				<tr>
+					<th>Parent Card</th>
+					<td>
+
+						<%= @card.parent_id.blank? ? 'No' : link_to(@card.parent.try(:title),@card.parent_id)  %>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+			<ul class="list-group">
+					  
+			<li class="list-group-item">
+				<b>Tasks</b>
+			 </li>
+			<% @tasks.each do |task| %>
+			      <li class="list-group-item ">
+			       <span style="color: <%= task.completed ? "red" : "green" %>;"><%=task.title%></span>
+			        
+			     </li>
+			 <%end%>			 
+			</ul>
+
+	</div>
+</div>

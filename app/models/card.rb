@@ -3,7 +3,7 @@ class Card < ApplicationRecord
 
   belongs_to :parent, :class_name => "Card", :foreign_key => "parent_id", optional: true
   has_many :children, :class_name => "Card", :foreign_key => "parent_id"
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   validates_length_of :title,  maximum: 288, presence: true
 
 
@@ -17,6 +17,10 @@ class Card < ApplicationRecord
 
   def self.uncompleted_cards 
   	self.all.reject{|card| card unless !card.tasks_completed? && !card.tasks.blank? }
+  end
+
+  def self.draft_cards
+    self.all.reject{|card| card if !card.tasks.blank?}
   end
 
 end

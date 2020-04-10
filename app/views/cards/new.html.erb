@@ -1,5 +1,10 @@
-<h1>New Board</h1>
 
-<%= render 'form', card: @card %>
+<div class="container">
 
-<%= link_to 'Back', board_cards_path %>
+<h1>New Card</h1>
+
+	<%= render 'form', card: @card %>
+	<div class="form-group">
+	<%= link_to 'Back', board_cards_path %>
+	</div>
+</div>

@@ -1,11 +1,13 @@
 class CardsController < ApplicationController
-  before_action :set_board, only: [:show, :edit, :update, :destroy, :index, :new, :create, :get_children]
+  before_action :set_board, only: [ :edit, :update, :index, :new, :create, :get_children]
+  before_action :set_card, only: [:show, :destroy]
   before_action :authenticate_board, only: [:show, :edit, :destroy, :index]
 
   def index
     @cards = @board.cards.where(parent_id: '')
     @completed_cards = @board.cards.competed_cards
     @uncompleted_cards = @board.cards.uncompleted_cards
+    @draft_cards = @board.cards.draft_cards
   end
 
   def new
@@ -33,9 +35,25 @@ class CardsController < ApplicationController
   def update
   end
 
+  def destroy
+    unless @card.tasks.size > 0 || @card.children.size > 0
+      @card.destroy
+      notice = "Card was successfully deleted"
+    else
+      notice = "The card have some dependencies, it may child cards or tasks"
+    end
+    respond_to do |format|
+        format.html {redirect_to board_cards_url(@board) , notice: notice }
+    end 
+  end
+
   def get_children
     @parent = Card.find(params[:parent])
     @children = @parent.children
+  end
+
+  def show
+    @tasks = @card.tasks
   end
 
 private 
@@ -48,5 +66,9 @@ private
       @board = Board.find(params[:board_id])
     end
 
+    def set_card
+      @card = Card.find(params[:id])
+      @board = @card.board
+    end
 
 end
