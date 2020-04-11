@@ -3,7 +3,7 @@
 	<% if !@subscription.additional_users %>
 	<p>
 		<label>Number of Boards</label>
-		<input type="number" name="subscribe[number_of_boards]" onkeyup="calculate_subscription('<%=@subscription.id%>')" id="number_of_boards" >
+		<input type="number" name="subscribe[number_of_boards]" onkeyup="calculate_subscription('<%=@subscription.id%>')" id="number_of_boards" value="<%=number_of_boards%>" >
 		<!-- <input type="hidden" name="subscribe[number_of_users]" value="1"  id="number_of_users" >		 -->
 	</p>
 	<%else%>
@@ -13,7 +13,7 @@
 			<input type="hidden" value="-1"  name="subscribe[number_of_boards]" id="number_of_boards" >	
 			<label><b>Unlimited</b>.</label>
 			<label>Number of Extra Users</label>
-			<input type="number" name="subscribe[number_of_users]" onkeyup="calculate_subscription('<%=@subscription.id%>')"  id="number_of_users" >
+			<input type="number" name="subscribe[number_of_users]" onkeyup="calculate_subscription('<%=@subscription.id%>')" value="<%= extra_users %>" id="number_of_users" >
 		</p>
 	<%end%>
 

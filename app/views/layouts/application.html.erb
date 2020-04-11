@@ -43,7 +43,7 @@
         </div>
         <div class="modal-body">
           <p>Location: <%= current_user.organisation.try(:location) %></p>
-          <p>Subscription package: <%= current_user.organisation.subscription.title if  !current_user.organisation.subscription.blank? %></p>
+          <p>Subscription package: <%= link_to current_user.organisation.subscription.title, plan_choice_organisations_path  if  !current_user.organisation.subscription.blank? %></p>
           <p>Maximum Users: <%= current_user.organisation.number_of_users if  !current_user.organisation.blank? %></p>
         </div>
         <div class="modal-footer">

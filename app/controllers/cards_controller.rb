@@ -7,7 +7,6 @@ class CardsController < ApplicationController
     @cards = @board.cards.where(parent_id: '')
     @completed_cards = @board.cards.competed_cards
     @uncompleted_cards = @board.cards.uncompleted_cards
-    @draft_cards = @board.cards.draft_cards
   end
 
   def new

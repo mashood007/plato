@@ -6,21 +6,17 @@ class Card < ApplicationRecord
   has_many :tasks, dependent: :destroy
   validates_length_of :title,  maximum: 288, presence: true
 
-
-  def tasks_completed?
-  	self.tasks.size == self.tasks.completed_are.size 
+  def completed
+    tasks.where(completed: true).blank?
   end
 
   def self.competed_cards
-  	self.all.reject{|card| card unless card.tasks_completed? && !card.tasks.blank? }
+    self.distinct.joins(:tasks).where("tasks.completed = true")
   end
 
   def self.uncompleted_cards 
-  	self.all.reject{|card| card unless !card.tasks_completed? && !card.tasks.blank? }
+  	self.distinct.joins(:tasks).where("tasks.completed = false")
   end
 
-  def self.draft_cards
-    self.all.reject{|card| card if !card.tasks.blank?}
-  end
 
 end

@@ -42,9 +42,13 @@ class OrganisationsController < ApplicationController
 
 	def subscribed
     	@organisation = current_user.organisation
-        if @organisation.update(subscribe_params)
-        	redirect_to home_index_path
-        end
+    	if subscribe_params[:number_of_users] < @organisation.users.size
+    	   redirect_to home_index_url , notice: 'You have more users than that you described'    		
+        else
+	      if @organisation.update(subscribe_params)
+	        redirect_to home_index_path
+	      end
+       end
     end
 
 
