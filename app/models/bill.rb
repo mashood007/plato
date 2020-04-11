@@ -33,7 +33,6 @@ class Bill
 	end
 
 	def additional_users_cost
-		puts "******************",@number_of_users.inspect
 		@number_of_users > 0 ? (@number_of_users * @subscription.cost_per_add_user * 12 ) : 0
 	end
 
